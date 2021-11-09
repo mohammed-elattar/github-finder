@@ -5,9 +5,9 @@ import { faCheck, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import Repos from '../repos/Repos';
 import GithubContext from '../../context/github/githubContext';
 
-const User = ({ getUserRepos, repos }) => {
+const User = () => {
   const githubContext = useContext(GithubContext);
-  const { user, getUser, loading } = githubContext;
+  const { user, getUser, getUserRepos, repos } = githubContext;
   const { userName } = useParams();
   useEffect(() => {
     getUser(userName);
