@@ -2,12 +2,14 @@ import React, { useEffect, Fragment } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import Repos from '../repos/Repos';
 
-const User = ({ user, getUser, loading }) => {
+const User = ({ user, getUser, loading, getUserRepos, repos }) => {
   const { userName } = useParams();
   useEffect(() => {
     getUser(userName);
-  }, [userName, getUser]);
+    getUserRepos(userName);
+  }, [userName, getUser, getUserRepos]);
   const {
     name,
     company,
@@ -92,6 +94,7 @@ const User = ({ user, getUser, loading }) => {
         <div className='badge badge-danger'>Reops: {public_repos}</div>
         <div className='badge badge-dark'>Gists: {public_gists}</div>
       </div>
+      <Repos repos={repos} />
     </Fragment>
   );
 };
