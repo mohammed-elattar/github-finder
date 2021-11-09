@@ -1,15 +1,18 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect, Fragment, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import Repos from '../repos/Repos';
+import GithubContext from '../../context/github/githubContext';
 
-const User = ({ user, getUser, loading, getUserRepos, repos }) => {
+const User = ({ getUserRepos, repos }) => {
+  const githubContext = useContext(GithubContext);
+  const { user, getUser, loading } = githubContext;
   const { userName } = useParams();
   useEffect(() => {
     getUser(userName);
     getUserRepos(userName);
-  }, [userName, getUser, getUserRepos]);
+  }, []);
   const {
     name,
     company,
@@ -48,8 +51,7 @@ const User = ({ user, getUser, loading, getUserRepos, repos }) => {
           <p>Location: {location}</p>
         </div>
         <div>
-          {bio &
-          (
+          {bio && (
             <Fragment>
               <h3>Bio</h3>
               <p>{bio}</p>
@@ -60,8 +62,7 @@ const User = ({ user, getUser, loading, getUserRepos, repos }) => {
           </a>
           <ul>
             <li>
-              {login &
-              (
+              {login && (
                 <Fragment>
                   <strong>Username: </strong> {login}
                 </Fragment>
@@ -69,8 +70,7 @@ const User = ({ user, getUser, loading, getUserRepos, repos }) => {
             </li>
 
             <li>
-              {company &
-              (
+              {company && (
                 <Fragment>
                   <strong>Company: </strong> {company}
                 </Fragment>
@@ -78,8 +78,7 @@ const User = ({ user, getUser, loading, getUserRepos, repos }) => {
             </li>
 
             <li>
-              {blog &
-              (
+              {blog && (
                 <Fragment>
                   <strong>Website: </strong> {blog}
                 </Fragment>
